@@ -14,7 +14,7 @@ from agno.agent import Agent
 from agno.models.openrouter import OpenRouter
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
-from bindu.penguin.bindufy import bindufy  # type: ignore[import-untyped]
+from bindu.penguin.bindufy import bindufy
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -148,7 +148,8 @@ async def run_agent(messages: list[dict[str, str]]) -> Any:
         raise AgentNotInitializedError
 
     # Run the agent and get response
-    return await agent.arun(messages)  # type: ignore[invalid-await]
+    result = agent.run(messages)
+    return result
 
 
 async def handler(messages: list[dict[str, str]]) -> Any:
