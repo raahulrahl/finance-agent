@@ -14,7 +14,7 @@ from agno.agent import Agent
 from agno.models.openrouter import OpenRouter
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
-from bindu.penguin.bindufy import bindufy
+from bindu.penguin.bindufy import bindufy  # type: ignore[import-untyped]
 from dotenv import load_dotenv
 
 # Load environment variables from .env file

@@ -1073,6 +1073,7 @@ dev = [
     { name = "ruff" },
     { name = "tox-uv" },
     { name = "ty" },
+    { name = "types-pyperclip" },
     { name = "types-python-dateutil" },
     { name = "types-requests" },
     { name = "types-setuptools" },
@@ -1106,6 +1107,7 @@ dev = [
     { name = "ruff", specifier = ">=0.11.5" },
     { name = "tox-uv", specifier = ">=1.11.3" },
     { name = "ty", specifier = ">=0.0.1a16" },
+    { name = "types-pyperclip", specifier = ">=1.8.0" },
     { name = "types-python-dateutil", specifier = ">=2.9.0" },
     { name = "types-requests", specifier = ">=2.31.0" },
     { name = "types-setuptools", specifier = ">=75.0.0" },
@@ -2994,6 +2996,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f5/24/cb09efec5cc954f7f9b930bf8279447d24618bb6758d4f6adf2574c41780/typer-0.24.1.tar.gz", hash = "sha256:e39b4732d65fbdcde189ae76cf7cd48aeae72919dea1fdfc16593be016256b45", size = 118613, upload-time = "2026-02-21T16:54:40.609Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4a/91/48db081e7a63bb37284f9fbcefda7c44c277b18b0e13fbc36ea2335b71e6/typer-0.24.1-py3-none-any.whl", hash = "sha256:112c1f0ce578bfb4cab9ffdabc68f031416ebcc216536611ba21f04e9aa84c9e", size = 56085, upload-time = "2026-02-21T16:54:41.616Z" },
+]
+
+[[package]]
+name = "types-pyperclip"
+version = "1.11.0.20260216"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/50/0a/7660dac5c36c9848f9de204411b567558d545529a9d63be1ad25c4eacf1e/types_pyperclip-1.11.0.20260216.tar.gz", hash = "sha256:32fdef1b265cb1f06622728b719fb0ad622cef0bb10a081a7423c194ac4ae68f", size = 7274, upload-time = "2026-02-16T04:11:43.623Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0e/ba/e09c4071f3faae398789c4d8132ed62392ddd24373f55d61643772592c84/types_pyperclip-1.11.0.20260216-py3-none-any.whl", hash = "sha256:7499782ee5b87a3e73f644df4b7d0140f7d41b894806e456adfaf086cfeb390f", size = 7633, upload-time = "2026-02-16T04:11:42.445Z" },
 ]
 
 [[package]]
