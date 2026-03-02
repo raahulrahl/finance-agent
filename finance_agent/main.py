@@ -18,7 +18,9 @@ from bindu.penguin.bindufy import bindufy
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
+
 load_dotenv()
+
 
 # Global agent instance
 agent: Agent | None = None
@@ -35,6 +37,7 @@ class AgentNotInitializedError(RuntimeError):
 def load_config() -> dict:
     """Load agent configuration from project root."""
     # Try multiple possible locations for agent_config.json
+
     possible_paths = [
         Path(__file__).parent.parent / "agent_config.json",  # Project root
         Path(__file__).parent / "agent_config.json",  # Same directory as main.py
@@ -46,15 +49,21 @@ def load_config() -> dict:
             try:
                 with open(config_path) as f:
                     return json.load(f)
+
             except (PermissionError, json.JSONDecodeError) as e:
                 print(f"⚠️  Error reading {config_path}: {type(e).__name__}")
+
                 continue
+
             except Exception as e:
                 print(f"⚠️  Unexpected error reading {config_path}: {type(e).__name__}")
+
                 continue
 
     # If no config found or readable, create a minimal default
+
     print("⚠️  No agent_config.json found, using default configuration")
+
     return {
         "name": "finance-agent",
         "description": "AI financial analyst agent",
@@ -88,9 +97,7 @@ async def initialize_agent() -> None:
         raise ValueError(error_msg)
 
     # Initialize tools
-    # enabling common financial data features
     finance_tools = YFinanceTools()
-
     search_tools = DuckDuckGoTools()
 
     # Create the finance agent
@@ -142,12 +149,10 @@ async def initialize_agent() -> None:
 
 
 async def run_agent(messages: list[dict[str, str]]) -> Any:
-    """Run the agent with the given messages."""
+    """Run the agent with given messages."""
     global agent
     if not agent:
         raise AgentNotInitializedError
-
-    # Run the agent and get response
     result = agent.run(messages)
     return result
 

@@ -7,6 +7,7 @@ author: paras@getbindu.com
 description: |
   AI-powered financial analysis agent that provides real-time stock data, market news, and investment insights.
   Combines YFinance data with web search to generate professional financial reports with clean markdown tables.
+  Features intelligent routing to specialized analysis based on query content.
 
 # Tags and Modes
 tags:
@@ -15,6 +16,11 @@ tags:
   - market-data
   - investment-research
   - financial-reports
+  - portfolio-analysis
+  - risk-assessment
+  - market-news
+  - stock-prices
+  - financial-ratios
 
 input_modes:
   - text/plain
@@ -22,6 +28,7 @@ input_modes:
 
 output_modes:
   - text/plain
+  - text/markdown
   - application/json
 
 # Example Queries
@@ -31,6 +38,9 @@ examples:
   - "latest news about semiconductor stocks"
   - "show me key financial ratios for microsoft"
   - "compare tesla and ford financials"
+  - "portfolio analysis for tech stocks"
+  - "market trends in AI sector"
+  - "risk assessment for growth stocks"
 
 # Detailed Capabilities
 capabilities_detail:
@@ -43,12 +53,29 @@ capabilities_detail:
       - "Professional markdown table formatting"
       - "Investment insight generation"
       - "Financial ratio analysis"
+      - "Market trend identification"
     limitations: "Not for real-time trading or portfolio management"
 
   secondary_capability:
-    supported: false
-    planned_version: "TODO: Future version"
-    description: "TODO: Planned feature description"
+    supported: true
+    description: "Advanced financial analysis and research"
+    features:
+      - "Multi-source data aggregation"
+      - "Comparative analysis tools"
+      - "Risk assessment metrics"
+      - "Market sentiment analysis"
+      - "Sector performance tracking"
+    limitations: "Historical data may have delays; not suitable for high-frequency trading"
+
+  analysis_capability:
+    supported: true
+    description: "Comprehensive financial analysis with structured output"
+    features:
+      - "Technical analysis indicators"
+      - "Fundamental analysis ratios"
+      - "Market comparison tools"
+      - "Performance metrics calculation"
+    limitations: "Analysis based on publicly available data; may not include proprietary information"
 
 # Requirements
 requirements:
