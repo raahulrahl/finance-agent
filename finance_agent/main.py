@@ -26,6 +26,12 @@ _initialized = False
 _init_lock = asyncio.Lock()
 
 
+class AgentNotInitializedError(RuntimeError):
+    """Raised when agent is accessed before initialization."""
+
+    pass
+
+
 def load_config() -> dict:
     """Load agent configuration from project root."""
     # Try multiple possible locations for agent_config.json
@@ -103,7 +109,7 @@ async def initialize_agent() -> None:
         """),
         instructions=dedent("""\
             CRITICAL FORMATTING RULES - FOLLOW EXACTLY:
-            
+
             1. **NEVER output raw JSON or mixed content** - Only use clean markdown
             2. **ALWAYS create complete, properly formatted markdown tables** like this:
                | Metric | Value |
@@ -114,14 +120,14 @@ async def initialize_agent() -> None:
             4. **ALWAYS complete your response before ending**
             5. **Use simple bullet points with hyphens (-) for text content**
             6. **Keep responses concise and well-structured**
-            
+
             CONTENT GUIDELINES:
             - Start with a clear title using # heading
             - Present financial data in complete markdown tables
             - Use bullet points for news and analysis
             - End with a brief summary
             - Include disclaimer about financial advice
-            
+
             ABSOLUTELY FORBIDDEN:
             - Raw JSON output
             - Incomplete tables
@@ -135,15 +141,14 @@ async def initialize_agent() -> None:
     print("✅ Finance Agent initialized")
 
 
-def run_agent(messages: list[dict[str, str]]) -> Any:
+async def run_agent(messages: list[dict[str, str]]) -> Any:
     """Run the agent with the given messages."""
     global agent
     if not agent:
-        raise RuntimeError("Agent not initialized")
+        raise AgentNotInitializedError
 
     # Run the agent and get response
-    response = agent.arun(messages)
-    return response  # type: ignore[invalid-await]
+    return await agent.arun(messages)  # type: ignore[invalid-await]
 
 
 async def handler(messages: list[dict[str, str]]) -> Any:

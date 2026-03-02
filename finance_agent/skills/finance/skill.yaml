@@ -100,7 +100,7 @@ documentation:
 
   input_structure: |
     Accepts natural language queries about stocks, financial analysis, and market research.
-    
+
     Examples:
     - "analyze nvidia stock"
     - "what's the current price of AAPL"
@@ -115,7 +115,7 @@ documentation:
 
   output_format: |
     Produces professional financial reports with:
-    
+
     1. Clear markdown tables for numerical data
     2. Bullet-pointed news summaries
     3. Concise analysis and insights
@@ -183,7 +183,7 @@ documentation:
 
   installation: |
     The Finance skill is included in the finance-agent package.
-    
+
     Required packages are automatically installed:
     - yfinance>=0.2.50 (market data)
     - duckduckgo-search>=6.0.0 (news search)
