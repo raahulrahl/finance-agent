@@ -8,7 +8,7 @@ import sys
 import traceback
 from pathlib import Path
 from textwrap import dedent
-from typing import Any
+from typing import Any, cast
 
 from agno.agent import Agent
 from agno.models.openrouter import OpenRouter
@@ -35,34 +35,15 @@ class AgentNotInitializedError(RuntimeError):
 
 
 def load_config() -> dict[str, Any]:
-    """Load agent configuration from project root."""
-    # Try multiple possible locations for agent_config.json
+    """Load agent config from `agent_config.json` or return defaults."""
+    config_path = Path(__file__).parent / "agent_config.json"
 
-    possible_paths = [
-        Path(__file__).parent.parent / "agent_config.json",  # Project root
-        Path(__file__).parent / "agent_config.json",  # Same directory as main.py
-        Path.cwd() / "agent_config.json",  # Current working directory
-    ]
-
-    for config_path in possible_paths:
-        if config_path.exists():
-            try:
-                with open(config_path) as f:
-                    return json.load(f)
-
-            except (PermissionError, json.JSONDecodeError) as e:
-                print(f"⚠️  Error reading {config_path}: {type(e).__name__}")
-
-                continue
-
-            except Exception as e:
-                print(f"⚠️  Unexpected error reading {config_path}: {type(e).__name__}")
-
-                continue
-
-    # If no config found or readable, create a minimal default
-
-    print("⚠️  No agent_config.json found, using default configuration")
+    if config_path.exists():
+        try:
+            with open(config_path) as f:
+                return cast(dict[str, Any], json.load(f))
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"⚠️  Failed to load config from {config_path}: {exc}")
 
     return {
         "name": "finance-agent",

@@ -3,6 +3,7 @@
 import argparse
 import os
 import sys
+from typing import cast
 
 import pyperclip
 import requests
@@ -27,19 +28,16 @@ def get_auth0_token(domain: str, client_id: str, client_secret: str) -> str:
     try:
         response = requests.post(url, json=payload, timeout=10)
         response.raise_for_status()
-        return response.json()["access_token"]
+        return cast(str, response.json()["access_token"])
     except requests.exceptions.HTTPError as e:
         console.print(f"[red]HTTP Error {e.response.status_code}:[/red] {e.response.text}")
         sys.exit(1)
     except requests.exceptions.RequestException as e:
         console.print(f"[red]Error:[/red] {e}")
         sys.exit(1)
-    except Exception:
-        console.print("[red]Unexpected error occurred[/red]")
+    except Exception as e:
+        console.print(f"[red]Unexpected error occurred: {e}[/red]")
         sys.exit(1)
-
-    # This line should never be reached due to sys.exit calls above
-    return ""
 
 
 def main():
